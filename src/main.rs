@@ -7,7 +7,8 @@ fn main() {
 
   let app: &mut App = app.add_systems(Startup, (spawn_ball, spawn_camera));
 
-  let app: &mut App = app.add_systems(Update, project_positions);
+  let app: &mut App =
+    app.add_systems(Update, (move_ball, project_positions.after(move_ball)));
 
   let _app_exit: AppExit = app.run();
 }
@@ -45,6 +46,10 @@ struct Position(Vec2);
 #[derive(Component)]
 #[require(Position)]
 struct Ball;
+
+fn move_ball(mut position: Single<&mut Position, With<Ball>>) {
+  position.0.x += 1.0;
+}
 
 fn project_positions(mut positionables: Query<(&mut Transform, &Position)>) {
   for (mut transform, position) in &mut positionables {
