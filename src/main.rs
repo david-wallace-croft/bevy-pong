@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 mod ball;
 mod camera;
+mod paddle;
 pub(crate) mod position;
 
 fn main() {
@@ -9,8 +10,14 @@ fn main() {
 
   let app: &mut App = app.add_plugins(DefaultPlugins);
 
-  let app: &mut App =
-    app.add_systems(Startup, (ball::spawn_ball, camera::spawn_camera));
+  let app: &mut App = app.add_systems(
+    Startup,
+    (
+      ball::spawn_ball,
+      camera::spawn_camera,
+      paddle::spawn_paddles,
+    ),
+  );
 
   let app: &mut App = app.add_systems(
     Update,
