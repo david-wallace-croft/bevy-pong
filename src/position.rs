@@ -1,10 +1,10 @@
-use bevy::prelude::*;
+use ::bevy::prelude::*;
 
 #[derive(Component, Default)]
 #[require(Transform)]
-pub(super) struct Position(pub(super) Vec2);
+pub struct Position(pub Vec2);
 
-pub(super) fn project_positions(
+pub fn project_positions(
   mut positionables: Query<(&mut Transform, &Position)>
 ) {
   for (mut transform, position) in &mut positionables {

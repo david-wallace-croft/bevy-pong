@@ -2,8 +2,11 @@ use bevy::prelude::*;
 
 mod ball;
 mod camera;
+mod collision;
 mod paddle;
-pub(crate) mod position;
+mod position;
+mod shape;
+mod velocity;
 
 fn main() {
   let mut app: App = App::new();
@@ -24,6 +27,7 @@ fn main() {
     (
       ball::move_ball,
       position::project_positions.after(ball::move_ball),
+      ball::handle_collisions.after(ball::move_ball),
     ),
   );
 

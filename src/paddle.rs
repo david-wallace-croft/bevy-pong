@@ -1,15 +1,19 @@
 use super::position::Position;
-use bevy::prelude::*;
+use super::shape::Shape;
+use ::bevy::prelude::*;
 
 const PADDLE_WIDTH: f32 = 10.;
 
 const PADDLE_HEIGHT: f32 = 50.;
 
 #[derive(Component)]
-#[require(Position)]
+#[require(
+  Position,
+  Shape = Shape(Vec2::new(PADDLE_WIDTH, PADDLE_HEIGHT)),
+)]
 struct Paddle;
 
-pub(super) fn spawn_paddles(
+pub fn spawn_paddles(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut color_materials: ResMut<Assets<ColorMaterial>>,
