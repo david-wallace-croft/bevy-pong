@@ -1,9 +1,11 @@
 use bevy::prelude::*;
 
+mod ai;
 mod ball;
 mod camera;
 mod collision;
 mod paddle;
+mod player;
 mod position;
 mod shape;
 mod velocity;
