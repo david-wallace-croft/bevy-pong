@@ -4,6 +4,7 @@ mod ai;
 mod ball;
 mod camera;
 mod collision;
+mod gutter;
 mod paddle;
 mod player;
 mod position;
@@ -20,6 +21,7 @@ fn main() {
     (
       ball::spawn_ball,
       camera::spawn_camera,
+      gutter::spawn_gutters,
       paddle::spawn_paddles,
     ),
   );
