@@ -1,19 +1,56 @@
 use super::ai::Ai;
+use super::constants::{
+  GUTTER_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED, PADDLE_WIDTH,
+};
 use super::player::Player;
 use super::position::Position;
 use super::shape::Shape;
+use super::velocity::Velocity;
 use ::bevy::prelude::*;
-
-const PADDLE_WIDTH: f32 = 10.;
-
-const PADDLE_HEIGHT: f32 = 50.;
 
 #[derive(Component)]
 #[require(
   Position,
   Shape = Shape(Vec2::new(PADDLE_WIDTH, PADDLE_HEIGHT)),
+  Velocity,
 )]
-struct Paddle;
+pub struct Paddle;
+
+pub fn handle_player_input(
+  key_code_button_input: Res<ButtonInput<KeyCode>>,
+  mut player_velocity_query: Query<&mut Velocity, With<Player>>,
+) {
+  if let Ok(mut player_velocity) = player_velocity_query.single_mut() {
+    println!("handle_player_input");
+    // TODO: Can two buttons be pressed simultaneously?
+    if key_code_button_input.pressed(KeyCode::ArrowUp) {
+      player_velocity.0.y = 1.;
+    } else if key_code_button_input.pressed(KeyCode::ArrowDown) {
+      player_velocity.0.y = -1.;
+    } else {
+      player_velocity.0.y = 0.;
+    }
+  }
+}
+
+pub fn move_paddles(
+  mut paddle_query: Query<(&mut Position, &Velocity), With<Paddle>>,
+  window: Query<&Window>,
+) {
+  if let Ok(window) = window.single() {
+    let window_height: f32 = window.resolution.height();
+
+    let max_y: f32 = window_height / 2. - GUTTER_HEIGHT - PADDLE_HEIGHT / 2.;
+
+    for (mut position, velocity) in &mut paddle_query {
+      let new_position: Vec2 = position.0 + velocity.0 * PADDLE_SPEED;
+
+      if new_position.y.abs() < max_y {
+        position.0 = new_position;
+      }
+    }
+  }
+}
 
 pub fn spawn_paddles(
   mut commands: Commands,

@@ -1,9 +1,7 @@
-use ::bevy::prelude::*;
-
+use super::constants::GUTTER_HEIGHT;
 use super::position::Position;
 use super::shape::Shape;
-
-const GUTTER_HEIGHT: f32 = 20.;
+use ::bevy::prelude::*;
 
 #[derive(Component)]
 #[require(
