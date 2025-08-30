@@ -1,3 +1,6 @@
+use crate::scored::Scored;
+use crate::scorer::Scorer;
+
 use super::collision::Collision;
 use super::position::Position;
 use super::shape::Shape;
@@ -46,6 +49,24 @@ fn collide_with_side(
   Some(side)
 }
 
+pub fn detect_scoring(
+  mut ball_position_query: Query<&mut Position, With<Ball>>,
+  window: Query<&Window>,
+  mut scored_event_writer: EventWriter<Scored>,
+) {
+  if let Ok(window) = window.single() {
+    let window_width: f32 = window.resolution.width();
+
+    if let Ok(ball) = ball_position_query.single_mut() {
+      if ball.0.x > window_width / 2. {
+        scored_event_writer.write(Scored(Scorer::Ai));
+      } else if ball.0.x < -window_width / 2. {
+        scored_event_writer.write(Scored(Scorer::Player));
+      }
+    }
+  }
+}
+
 pub fn handle_collisions(
   mut ball_query: Query<(&mut Velocity, &Position, &Shape), With<Ball>>,
   without_ball_query: Query<(&Position, &Shape), Without<Ball>>,
@@ -81,6 +102,26 @@ pub fn move_ball(ball_single: Single<(&mut Position, &Velocity), With<Ball>>) {
   let (mut position, velocity) = ball_single.into_inner();
 
   position.0 += velocity.0 * BALL_SPEED;
+}
+
+pub fn reset_ball(
+  mut ball_query: Query<(&mut Position, &mut Velocity), With<Ball>>,
+  mut scored_event_reader: EventReader<Scored>,
+) {
+  for event in scored_event_reader.read() {
+    if let Ok((mut position, mut velocity)) = ball_query.single_mut() {
+      match event.0 {
+        Scorer::Ai => {
+          position.0 = Vec2::new(0., 0.);
+          velocity.0 = Vec2::new(-1., 1.);
+        },
+        Scorer::Player => {
+          position.0 = Vec2::new(0., 0.);
+          velocity.0 = Vec2::new(1., 1.);
+        },
+      }
+    }
+  }
 }
 
 pub fn spawn_ball(
