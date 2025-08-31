@@ -4,8 +4,8 @@ use ::bevy::prelude::*;
 
 #[derive(Resource, Default)]
 pub struct Score {
-  player: u32,
-  ai: u32,
+  pub player: u32,
+  pub ai: u32,
 }
 
 pub fn update_score(
@@ -17,6 +17,6 @@ pub fn update_score(
       Scorer::Ai => score.ai += 1,
       Scorer::Player => score.player += 1,
     }
-    println!("Score: {} - {}", score.player, score.ai);
+    // println!("Score: {} - {}", score.player, score.ai);
   }
 }

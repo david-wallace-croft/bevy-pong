@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 mod ai;
+mod ai_score;
 mod ball;
 mod camera;
 mod collision;
@@ -8,8 +9,10 @@ mod constants;
 mod gutter;
 mod paddle;
 mod player;
+mod player_score;
 mod position;
 mod score;
+mod scoreboard;
 mod scored;
 mod scorer;
 mod shape;
@@ -31,6 +34,7 @@ fn main() {
       camera::spawn_camera,
       gutter::spawn_gutters,
       paddle::spawn_paddles,
+      scoreboard::spawn_scoreboard,
     ),
   );
 
@@ -42,6 +46,7 @@ fn main() {
       ball::detect_scoring,
       ball::reset_ball.after(ball::detect_scoring),
       score::update_score.after(ball::detect_scoring),
+      scoreboard::update_scoreboard.after(score::update_score),
       paddle::move_paddles.after(paddle::handle_player_input),
       position::project_positions.after(ball::move_ball),
       ball::handle_collisions.after(ball::move_ball),
