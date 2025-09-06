@@ -15,7 +15,15 @@
 
 ## Usage
 
+### Run in a Desktop Window
+
 - cargo run
+
+### Run in a Browser Window
+
+- cargo build --release --target wasm32-unknown-unknown
+- wasm-bindgen --out-dir ./out/ --target web ./target/wasm32-unknown-unknown/release/cargo-pong.wasm
+- http-server -o
 
 ## History
 
