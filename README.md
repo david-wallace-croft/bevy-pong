@@ -10,6 +10,8 @@
     - https://taintedcoders.com/bevy/tutorials/pong-tutorial
   - "How to Export your Bevy project to the Web with WASM" by Biped Potato
     - https://youtu.be/VjXiREbPtJs
+  - "Unofficial Bevy Cheat Book" by Ida Borisova  
+    - https://bevy-cheatbook.github.io/platforms/wasm.html  
 
 ## Usage
 
