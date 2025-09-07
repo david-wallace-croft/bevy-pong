@@ -1,3 +1,4 @@
+use bevy::app::PluginGroupBuilder;
 use bevy::prelude::*;
 
 mod ai;
@@ -21,7 +22,26 @@ mod velocity;
 fn main() {
   let mut app: App = App::new();
 
-  let app: &mut App = app.add_plugins(DefaultPlugins);
+  let canvas: Option<String> = Some("#bevy-pong-canvas".into());
+
+  let window: Window = Window {
+    canvas,
+    fit_canvas_to_parent: false,
+    resizable: false,
+    ..default()
+  };
+
+  let primary_window: Option<Window> = Some(window);
+
+  let window_plugin: WindowPlugin = WindowPlugin {
+    primary_window,
+    ..default()
+  };
+
+  let default_plugins_plugin_group_builder: PluginGroupBuilder =
+    DefaultPlugins.set(window_plugin);
+
+  let app: &mut App = app.add_plugins(default_plugins_plugin_group_builder);
 
   let app: &mut App = app.init_resource::<score::Score>();
 

@@ -1,16 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html
+  lang="en">
+<body
+  style="margin: 0px;">
+<canvas
+  id="bevy-pong-canvas">
+</canvas>
+<script
+  type="module">
+import init from './out/cargo-pong.js'
 
-<body style="margin: 0px;">
-  <script type="module">
-    import init from './out/cargo-pong.js'
-
-    init().catch((error) => {
-      if (!error.message.startsWith("Using exceptions for control flow, don't mind me. This isn't actually an error!")) {
-        throw error;
-      }
-    });
-  </script>
+init().catch((error) => {
+  if (!error.message.startsWith("Using exceptions for control flow, don't mind me. This isn't actually an error!")) {
+    throw error;
+  }
+});
+</script>
 </body>
-
 </html>
