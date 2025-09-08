@@ -1,5 +1,6 @@
-use bevy::app::PluginGroupBuilder;
-use bevy::prelude::*;
+use ::bevy::app::PluginGroupBuilder;
+use ::bevy::prelude::*;
+use ::bevy::window::PresentMode;
 
 mod ai;
 mod ai_score;
@@ -24,10 +25,23 @@ fn main() {
 
   let canvas: Option<String> = Some("#bevy-pong-canvas".into());
 
+  let resize_constraints = WindowResizeConstraints {
+    min_width: 500.,
+    min_height: 300.,
+    max_width: 500.,
+    max_height: 300.,
+  };
+
   let window: Window = Window {
     canvas,
-    fit_canvas_to_parent: false,
+    fit_canvas_to_parent: true,
+    name: Some("bevy.app".into()),
+    present_mode: PresentMode::AutoVsync,
+    prevent_default_event_handling: false,
     resizable: false,
+    resize_constraints,
+    resolution: (500., 300.).into(),
+    title: "I am a window!".into(),
     ..default()
   };
 

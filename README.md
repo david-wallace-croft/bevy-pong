@@ -12,6 +12,8 @@
     - https://youtu.be/VjXiREbPtJs
   - "Unofficial Bevy Cheat Book" by Ida Borisova  
     - https://bevy-cheatbook.github.io/platforms/wasm.html  
+  - "Bevy Examples / Window / Window Settings"  
+    - https://bevy.org/examples/window/window-settings/  
 
 ## Usage
 
