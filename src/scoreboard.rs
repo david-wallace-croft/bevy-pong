@@ -31,7 +31,7 @@ pub fn spawn_scoreboard(mut commands: Commands) {
       ..default()
     },
     TextColor(Color::WHITE),
-    TextLayout::new_with_justify(JustifyText::Center),
+    TextLayout::new_with_justify(Justify::Center),
     Node {
       position_type: PositionType::Absolute,
       top: Val::Px(5.0),
@@ -48,7 +48,7 @@ pub fn spawn_scoreboard(mut commands: Commands) {
       ..default()
     },
     TextColor(Color::WHITE),
-    TextLayout::new_with_justify(JustifyText::Center),
+    TextLayout::new_with_justify(Justify::Center),
     Node {
       position_type: PositionType::Absolute,
       top: Val::Px(5.0),

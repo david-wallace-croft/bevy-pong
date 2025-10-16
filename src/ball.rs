@@ -52,7 +52,7 @@ fn collide_with_side(
 pub fn detect_scoring(
   mut ball_position_query: Query<&mut Position, With<Ball>>,
   window: Query<&Window>,
-  mut scored_event_writer: EventWriter<Scored>,
+  mut scored_event_writer: MessageWriter<Scored>,
 ) {
   if let Ok(window) = window.single() {
     let window_width: f32 = window.resolution.width();
@@ -106,7 +106,7 @@ pub fn move_ball(ball_single: Single<(&mut Position, &Velocity), With<Ball>>) {
 
 pub fn reset_ball(
   mut ball_query: Query<(&mut Position, &mut Velocity), With<Ball>>,
-  mut scored_event_reader: EventReader<Scored>,
+  mut scored_event_reader: MessageReader<Scored>,
 ) {
   for event in scored_event_reader.read() {
     if let Ok((mut position, mut velocity)) = ball_query.single_mut() {

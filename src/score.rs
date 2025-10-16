@@ -10,7 +10,7 @@ pub struct Score {
 
 pub fn update_score(
   mut score: ResMut<Score>,
-  mut scored_event_reader: EventReader<Scored>,
+  mut scored_event_reader: MessageReader<Scored>,
 ) {
   for event in scored_event_reader.read() {
     match event.0 {

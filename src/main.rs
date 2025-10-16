@@ -40,7 +40,7 @@ fn main() {
     prevent_default_event_handling: false,
     resizable: false,
     resize_constraints,
-    resolution: (500., 300.).into(),
+    resolution: (500, 300).into(),
     title: "I am a window!".into(),
     ..default()
   };
@@ -59,7 +59,7 @@ fn main() {
 
   let app: &mut App = app.init_resource::<score::Score>();
 
-  let app: &mut App = app.add_event::<scored::Scored>();
+  let app: &mut App = app.add_message::<scored::Scored>();
 
   let app: &mut App = app.add_systems(
     Startup,

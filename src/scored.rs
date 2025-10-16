@@ -1,5 +1,5 @@
 use super::scorer::Scorer;
 use ::bevy::prelude::*;
 
-#[derive(Event)]
+#[derive(Message)]
 pub struct Scored(pub Scorer);
