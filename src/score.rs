@@ -10,10 +10,10 @@ pub struct Score {
 
 pub fn update_score(
   mut score: ResMut<Score>,
-  mut scored_event_reader: MessageReader<Scored>,
+  mut scored_message_reader: MessageReader<Scored>,
 ) {
-  for event in scored_event_reader.read() {
-    match event.0 {
+  for message in scored_message_reader.read() {
+    match message.0 {
       Scorer::Ai => score.ai += 1,
       Scorer::Player => score.player += 1,
     }

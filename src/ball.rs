@@ -52,16 +52,16 @@ fn collide_with_side(
 pub fn detect_scoring(
   mut ball_position_query: Query<&mut Position, With<Ball>>,
   window: Query<&Window>,
-  mut scored_event_writer: MessageWriter<Scored>,
+  mut scored_message_writer: MessageWriter<Scored>,
 ) {
   if let Ok(window) = window.single() {
     let window_width: f32 = window.resolution.width();
 
     if let Ok(ball) = ball_position_query.single_mut() {
       if ball.0.x > window_width / 2. {
-        scored_event_writer.write(Scored(Scorer::Ai));
+        scored_message_writer.write(Scored(Scorer::Ai));
       } else if ball.0.x < -window_width / 2. {
-        scored_event_writer.write(Scored(Scorer::Player));
+        scored_message_writer.write(Scored(Scorer::Player));
       }
     }
   }
@@ -106,11 +106,11 @@ pub fn move_ball(ball_single: Single<(&mut Position, &Velocity), With<Ball>>) {
 
 pub fn reset_ball(
   mut ball_query: Query<(&mut Position, &mut Velocity), With<Ball>>,
-  mut scored_event_reader: MessageReader<Scored>,
+  mut scored_message_reader: MessageReader<Scored>,
 ) {
-  for event in scored_event_reader.read() {
+  for message in scored_message_reader.read() {
     if let Ok((mut position, mut velocity)) = ball_query.single_mut() {
-      match event.0 {
+      match message.0 {
         Scorer::Ai => {
           position.0 = Vec2::new(0., 0.);
           velocity.0 = Vec2::new(-1., 1.);
