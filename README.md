@@ -1,7 +1,10 @@
 # Bevy Pong
 
 [![MIT licensed][mit-badge]][mit-url]
+[![CI][ci-badge]][ci-url]
 
+[ci-badge]: https://github.com/david-wallace-croft/bevy-pong/actions/workflows/ci.yaml/badge.svg
+[ci-url]: https://github.com/david-wallace-croft/bevy-pong/actions/workflows/ci.yaml
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-url]: https://github.com/david-wallace-croft/bevy-pong/blob/main/LICENSE.txt
 
@@ -13,7 +16,9 @@
   - "Unofficial Bevy Cheat Book" by Ida Borisova  
     - https://bevy-cheatbook.github.io/platforms/wasm.html  
   - "Bevy Examples / Window / Window Settings"  
-    - https://bevy.org/examples/window/window-settings/  
+    - https://bevy.org/examples/window/window-settings/
+  - "Bevy GitHub CI Template"
+    - https://github.com/bevyengine/bevy_github_ci_template/  
 
 ## Usage
 
