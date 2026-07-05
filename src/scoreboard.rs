@@ -27,15 +27,15 @@ pub fn spawn_scoreboard(mut commands: Commands) {
     PlayerScore,
     Text::new("0"),
     TextFont {
-      font_size: 72.0,
+      font_size: FontSize::Px(72.),
       ..default()
     },
     TextColor(Color::WHITE),
-    TextLayout::new_with_justify(Justify::Center),
+    TextLayout::justify(Justify::Center),
     Node {
       position_type: PositionType::Absolute,
-      top: Val::Px(5.0),
-      right: Val::Px(15.0),
+      top: Val::Px(5.),
+      right: Val::Px(15.),
       ..default()
     },
   ));
@@ -44,15 +44,15 @@ pub fn spawn_scoreboard(mut commands: Commands) {
     AiScore,
     Text::new("0"),
     TextFont {
-      font_size: 72.0,
+      font_size: FontSize::Px(72.),
       ..default()
     },
     TextColor(Color::WHITE),
-    TextLayout::new_with_justify(Justify::Center),
+    TextLayout::justify(Justify::Center),
     Node {
       position_type: PositionType::Absolute,
-      top: Val::Px(5.0),
-      left: Val::Px(15.0),
+      top: Val::Px(5.),
+      left: Val::Px(15.),
       ..default()
     },
   ));
